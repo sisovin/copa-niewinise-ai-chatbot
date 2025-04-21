@@ -12,3 +12,21 @@ model User {
   email String  @unique
   name  String?
 }
+
+model Chatbot {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  messages    Message[]
+}
+
+model Message {
+  id        Int      @id @default(autoincrement())
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  chatbotId Int
+  chatbot   Chatbot  @relation(fields: [chatbotId], references: [id])
+}
