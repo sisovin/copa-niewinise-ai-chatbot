@@ -19,11 +19,20 @@ This project is a COPA Niewinise SAAS AI Chatbot for Email Marketing utilizing N
    npm install typescript @types/react @types/node
    ```
 
+### Enabling TypeScript Strict Mode
+
+1. Open `next.config.js` and add the following configuration:
+   ```js
+   typescript: {
+     strict: true,
+   }
+   ```
+
 ### Implementing Authentication with Clerk
 
 1. Install Clerk:
    ```bash
-   npm install @clerk/clerk-sdk-node
+   npm install @clerk/clerk-react
    ```
 
 2. Add Clerk environment variables to your `.env.local` file:
@@ -34,7 +43,7 @@ This project is a COPA Niewinise SAAS AI Chatbot for Email Marketing utilizing N
 
 3. Wrap your application with `ClerkProvider` in `pages/_app.tsx`:
    ```tsx
-   import { ClerkProvider } from '@clerk/clerk-sdk-node';
+   import { ClerkProvider } from '@clerk/clerk-react';
 
    function MyApp({ Component, pageProps }) {
      return (
@@ -45,6 +54,36 @@ This project is a COPA Niewinise SAAS AI Chatbot for Email Marketing utilizing N
    }
 
    export default MyApp;
+   ```
+
+### Custom Clerk Components
+
+1. Create custom Clerk components to remove the watermark:
+   ```tsx
+   import React from 'react';
+   import { CustomSignIn, CustomSignUp, CustomUserButton, useCustomUser } from './CustomClerkComponents';
+
+   const ClerkAuth = () => {
+     const { isSignedIn } = useCustomUser();
+
+     return (
+       <div>
+         {isSignedIn ? (
+           <div>
+             <CustomUserButton />
+             <p>Welcome back!</p>
+           </div>
+         ) : (
+           <div>
+             <CustomSignIn path="/sign-in" routing="path" signUpUrl="/sign-up" />
+             <CustomSignUp path="/sign-up" routing="path" signInUrl="/sign-in" />
+           </div>
+         )}
+       </div>
+     );
+   };
+
+   export default ClerkAuth;
    ```
 
 ### Configuring Prisma and PostgreSQL
@@ -81,6 +120,24 @@ This project is a COPA Niewinise SAAS AI Chatbot for Email Marketing utilizing N
      id    Int     @id @default(autoincrement())
      email String  @unique
      name  String?
+   }
+
+   model Chatbot {
+     id          Int      @id @default(autoincrement())
+     name        String
+     description String?
+     createdAt   DateTime @default(now())
+     updatedAt   DateTime @updatedAt
+     messages    Message[]
+   }
+
+   model Message {
+     id        Int      @id @default(autoincrement())
+     content   String
+     createdAt DateTime @default(now())
+     updatedAt DateTime @updatedAt
+     chatbotId Int
+     chatbot   Chatbot  @relation(fields: [chatbotId], references: [id])
    }
    ```
 

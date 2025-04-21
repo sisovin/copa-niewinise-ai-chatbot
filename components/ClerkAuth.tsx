@@ -1,19 +1,20 @@
-import { SignIn, SignUp, UserButton, useUser } from '@clerk/clerk-react';
+import React from 'react';
+import { CustomSignIn, CustomSignUp, CustomUserButton, useCustomUser } from './CustomClerkComponents';
 
 const ClerkAuth = () => {
-  const { isSignedIn } = useUser();
+  const { isSignedIn } = useCustomUser();
 
   return (
     <div>
       {isSignedIn ? (
         <div>
-          <UserButton />
+          <CustomUserButton />
           <p>Welcome back!</p>
         </div>
       ) : (
         <div>
-          <SignIn path="/sign-in" routing="path" signUpUrl="/sign-up" />
-          <SignUp path="/sign-up" routing="path" signInUrl="/sign-in" />
+          <CustomSignIn path="/sign-in" routing="path" signUpUrl="/sign-up" />
+          <CustomSignUp path="/sign-up" routing="path" signInUrl="/sign-in" />
         </div>
       )}
     </div>
