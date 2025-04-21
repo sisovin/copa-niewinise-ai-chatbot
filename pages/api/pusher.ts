@@ -3,10 +3,10 @@ import { triggerEvent } from '../../services/PusherService';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
-    const { channel, event, data } = req.body;
+    const { channel, event, data, subscriptionPlan } = req.body;
 
     try {
-      await triggerEvent(channel, event, data);
+      await triggerEvent(channel, event, { ...data, subscriptionPlan });
       res.status(200).json({ message: 'Event triggered successfully' });
     } catch (error) {
       res.status(500).json({ error: 'Failed to trigger event' });

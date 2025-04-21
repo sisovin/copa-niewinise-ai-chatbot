@@ -10,6 +10,7 @@ const ClerkAuth = () => {
         <div>
           <CustomUserButton />
           <p>Welcome back!</p>
+          <a href="/billing-settings">Go to Billing Settings</a>
         </div>
       ) : (
         <div>

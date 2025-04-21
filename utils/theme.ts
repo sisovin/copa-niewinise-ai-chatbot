@@ -8,6 +8,8 @@ const theme = createTheme({
     text: '#000000',
     darkBackground: '#121212',
     darkText: '#ffffff',
+    subscriptionPlanBackground: '#e0e0e0',
+    subscriptionPlanText: '#000000',
   },
   fonts: {
     body: 'system-ui, sans-serif',

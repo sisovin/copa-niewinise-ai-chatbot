@@ -6,9 +6,9 @@ const client = new UploadClient({ publicKey: process.env.UPLOADCARE_PUBLIC_KEY }
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
     try {
-      const file = req.body.file;
+      const { file, subscriptionPlan } = req.body;
       const result = await client.uploadFile(file);
-      res.status(200).json({ fileUrl: result.cdnUrl });
+      res.status(200).json({ fileUrl: result.cdnUrl, subscriptionPlan });
     } catch (error) {
       res.status(500).json({ error: 'File upload failed' });
     }

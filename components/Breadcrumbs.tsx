@@ -25,6 +25,9 @@ const Breadcrumbs = () => {
             </li>
           );
         })}
+        <li className="breadcrumb-item">
+          <Link href="/billing-settings">Billing Settings</Link>
+        </li>
       </ol>
       <style jsx>{`
         .breadcrumb {

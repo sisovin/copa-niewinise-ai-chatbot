@@ -49,3 +49,25 @@ export const handleWebhook = async (req, res) => {
 
   res.json({ received: true });
 };
+
+export const getSubscriptionPlanDetails = async (plan: string) => {
+  const plans = {
+    basic: {
+      name: 'Basic',
+      price: 10,
+      features: ['Feature 1', 'Feature 2'],
+    },
+    premium: {
+      name: 'Premium',
+      price: 20,
+      features: ['Feature 1', 'Feature 2', 'Feature 3'],
+    },
+    enterprise: {
+      name: 'Enterprise',
+      price: 30,
+      features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'],
+    },
+  };
+
+  return plans[plan] || null;
+};
