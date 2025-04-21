@@ -3,7 +3,7 @@ import { generateChatbotResponse } from '../../services/OpenAIService';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
-    const { prompt } = req.body;
+    const { prompt, subscriptionPlan } = req.body;
 
     if (!prompt) {
       return res.status(400).json({ error: 'Prompt is required' });
@@ -11,7 +11,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     try {
       const response = await generateChatbotResponse(prompt);
-      return res.status(200).json({ response });
+      return res.status(200).json({ response, subscriptionPlan });
     } catch (error) {
       return res.status(500).json({ error: 'Failed to generate chatbot response' });
     }

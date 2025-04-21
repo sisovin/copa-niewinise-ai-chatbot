@@ -4,9 +4,14 @@ import { Button } from 'shadcn-ui';
 
 const Home = () => {
   const [darkMode, setDarkMode] = useState(false);
+  const [subscriptionPlan, setSubscriptionPlan] = useState('basic');
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
+  };
+
+  const handleSubscriptionChange = (e) => {
+    setSubscriptionPlan(e.target.value);
   };
 
   return (
@@ -20,6 +25,18 @@ const Home = () => {
         </header>
         <main>
           <p>This is the landing page for the COPA Niewinise AI Chatbot.</p>
+          <div>
+            <label htmlFor="subscriptionPlan">Subscription Plan:</label>
+            <select
+              id="subscriptionPlan"
+              value={subscriptionPlan}
+              onChange={handleSubscriptionChange}
+            >
+              <option value="basic">Basic</option>
+              <option value="premium">Premium</option>
+              <option value="enterprise">Enterprise</option>
+            </select>
+          </div>
         </main>
       </div>
     </ThemeProvider>

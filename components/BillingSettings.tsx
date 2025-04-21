@@ -8,6 +8,7 @@ const BillingSettings = () => {
     cardNumber: '',
     expiryDate: '',
     cvv: '',
+    subscriptionPlan: '',
   });
 
   const handleChange = (e) => {
@@ -81,6 +82,19 @@ const BillingSettings = () => {
             value={billingInfo.cvv}
             onChange={handleChange}
           />
+        </div>
+        <div>
+          <label>Subscription Plan:</label>
+          <select
+            name="subscriptionPlan"
+            value={billingInfo.subscriptionPlan}
+            onChange={handleChange}
+          >
+            <option value="">Select a plan</option>
+            <option value="basic">Basic</option>
+            <option value="premium">Premium</option>
+            <option value="enterprise">Enterprise</option>
+          </select>
         </div>
         <button type="submit">Save</button>
       </form>

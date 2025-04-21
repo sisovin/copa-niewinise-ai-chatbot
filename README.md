@@ -139,6 +139,15 @@ This project is a COPA Niewinise SAAS AI Chatbot for Email Marketing utilizing N
      chatbotId Int
      chatbot   Chatbot  @relation(fields: [chatbotId], references: [id])
    }
+
+   model SubscriptionPlan {
+     id          Int      @id @default(autoincrement())
+     name        String
+     description String?
+     price       Float
+     createdAt   DateTime @default(now())
+     updatedAt   DateTime @updatedAt
+   }
    ```
 
 5. Run Prisma migrations:
@@ -172,3 +181,28 @@ This project is a COPA Niewinise SAAS AI Chatbot for Email Marketing utilizing N
    PUSHER_SECRET=<your-pusher-secret>
    PUSHER_CLUSTER=<your-pusher-cluster>
    ```
+
+### Subscription Plan
+
+1. Add a new field for subscription plan selection in the billing settings component.
+2. Update the `handleChange` function to handle the new field.
+3. Update the `handleSubmit` function to include the subscription plan.
+4. Add a new breadcrumb item for the billing settings page.
+5. Add a new route for the billing settings page in the ClerkAuth component.
+6. Add a new menu item for the billing settings page in the Sidebar component.
+7. Add a new field for file description in the UploadcareFileUpload component.
+8. Update the `handleFileChange` function to handle the new field.
+9. Add a new environment variable for the subscription plan in `next.config.js`.
+10. Add a new route for the billing settings page in `pages/_app.tsx`.
+11. Add a new route for the billing settings page in `pages/api/auth/[...clerk].ts`.
+12. Add a new field for the subscription plan in `pages/api/openai.ts`.
+13. Add a new field for the subscription plan in `pages/api/pusher.ts`.
+14. Add a new field for the subscription plan in `pages/api/stripe/webhook.ts`.
+15. Add a new field for the subscription plan in `pages/api/uploadcare.ts`.
+16. Add a new section for the subscription plan in `pages/index.tsx`.
+17. Add a new model for the subscription plan in `prisma/schema.prisma`.
+18. Add a new function for the subscription plan in `services/OpenAIService.ts`.
+19. Add a new function for the subscription plan in `services/PusherService.ts`.
+20. Add a new function for the subscription plan in `services/StripeService.ts`.
+21. Add a new style for the subscription plan in `styles/globals.css`.
+22. Add a new theme for the subscription plan in `utils/theme.ts`.
